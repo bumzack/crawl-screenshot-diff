@@ -1,0 +1,36 @@
+<div ng-controller="JobListCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>all jobs</h2>
+			
+			<label for="fmnsdknfs" class="col-sm-1 control-label">filter:</label>
+			<div class="col-sm-4  input-group ">
+				<input type="text" class="form-control" ng-model="filterJob" placeholder="filter">
+			</div>
+		</div>
+		<div class="col-md-12">
+ 			<table class="table">
+				<tr>
+					<th>uid</th> 
+					<th>useruid</th>
+					<th>domainuid</th>
+					<th>jobtype</th>
+					<th>description</th>
+ 					<th>status</th> 
+ 					<th></th> 
+ 					
+				</tr>
+				<tr  ng-repeat="job in allJobs | filter:filterJob  ">
+					<td>{{job.uid }}</td>
+					<td>{{job.useruid }}</td>
+					<td>{{job.domainuid }}</td>
+					<td>{{job.name }}</td>
+ 					<td>{{job.jobtype }}</td>
+ 					<td>{{job.description }}</td>
+ 					<td>{{job.status }}</td>
+ 					<td><span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="jobDelete(job.uid)"></span></td>					
+   				</tr>
+			</table> 
+ 		</div>
+	</div> 
+ </div>

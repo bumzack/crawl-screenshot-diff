@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de" ng-app="crawlscreenshotApp">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		
+		<title>crawl and screenshot</title>
+		
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.css" rel="stylesheet"> 
+		<link href="css/crawl-screenshot.css" rel="stylesheet"> 
+	 	
+		<script src="js/lib/jquery-1.11.0.js"></script>
+ 
+		<script src="js/lib/bootstrap.js"></script>
+		
+		<script src="js/lib/angular.js"></script>
+		<script src="js/lib/angular-route.js"></script>
+			
+		<!-- main()  -->
+		<script src="js/crawl-screenshot-diff.js"></script> 
+ 		
+		<script src="js/controller/ctrl_login.js"></script>
+		<script src="js/controller/ctrl_application.js"></script>		
+		<script src="js/controller/ctrl_job.js"></script>		
+		<script src="js/controller/ctrl_joblist.js"></script>		
+		
+		<script src="js/controller/ctrl_domain.js"></script>		
+		<script src="js/controller/ctrl_blacklist.js"></script>		
+	 	<script src="js/controller/ctrl_analytics.js"></script>
+	 	<script src="js/controller/ctrl_screenshotcomparison.js"></script>		
+	 	<script src="js/controller/ctrl_seo.js"></script>		
+ 	 		 
+	 	<script src="js/controller/ctrl_seo_keywords.js"></script>		
+ 	 	<script src="js/controller/ctrl_seo_keywords_per_page.js"></script>	
+ 	 	<script src="js/controller/ctrl_seo_keywords_per_page_by_contenttype.js"></script>
+ 	 	
+		<script src="js/factory/fact_authenticationinterceptor.js"></script> 
+		<script src="js/factory/fact_authorization.js"></script>  
+	
+		<script src="js/factory/fact_jobs.js"></script>
+		<script src="js/factory/fact_domains.js"></script>
+ 		<script src="js/factory/fact_blacklist.js"></script>
+		<script src="js/factory/fact_analytics.js"></script>
+		<script src="js/factory/fact_seo.js"></script>
+ 		
+		<script src="js/services/serv_usersession.js"></script>
+		
+ 		<script src="js/lib/sha512.js"></script>  
+	</head>
+	
+ 	<body ng-controller="ApplicationCtrl">  
+ 	     <div class="navbar navbar-default navbar-fixed-top " role="navigation">
+ 	    	<div class="container navbar-inverse ">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> <span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">crawl & screenshot & diff<span class="codeName">  v0.1.0</span></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+  					<li ng-if="currentUser.PAGE_DOMAIN" ><a href="#/domains">Domains</a></li>
+  					<li ng-if="currentUser.PAGE_JOBS" class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown">Jobs <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#/jobs">new job</a></li>
+								<li class="divider"></li>
+								<li><a href="#/joblist">admin jobs</a></li> 
+							</ul>
+					</li> 
+ 					<li ng-if="currentUser.PAGE_ANALYTICS" class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown">View pages <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#/analytics">view pages</a></li>
+ 							<li><a href="#/analyse-differences">show screenshot diffs</a></li> 
+						</ul>
+					</li>
+					<li ng-if="currentUser.PAGE_SEO" class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown">SEO (experimental) <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#/seo-keywords">keywords: absolute frequency</a></li>
+ 							<li><a href="#/seo-keywords-per-page">keywords per page</a></li>
+ 							<li><a href="#/seo-keywords-per-page-by-contentelement">keywords per page and content type</a></li> 
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+ 					<!-- 
+ 					<li ng-if="currentUser" class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown">admin <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#/admin">user management</a></li>
+								<li class="divider"></li>
+								<li><a href="#/blacklist">SEO word blacklist</a></li>
+							</ul>
+					</li>
+					-->		
+					<li ng-if="currentUser"><a href="#" ng-click="logout()">logout</a></li>
+					<li ng-if="!currentUser"><a href="#/userlogin">login</a></li>
+				</ul>
+			</div>
+			</div>
+			<!--/.nav-collapse -->
+		</div> 
+ 	 	
+		<div class="container">
+ 				<div ng-view></div>
+ 		</div>
+		<!-- /container -->
+	</body>
+</html>

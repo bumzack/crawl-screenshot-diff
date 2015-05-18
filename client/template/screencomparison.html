@@ -1,0 +1,77 @@
+<div ng-controller="ScreenshotCompareCtrl">
+ 	<div class="row">
+		<div class="col-md-6">
+			<h3>available screenshot comparisons</h3>
+  			<div class="form-group">
+    			<label for="listofwebsites">available screenshot comparisons</label>
+				<select id="listofwebsites" ng-model="pagedata.selectedComparison" ng-options="comparison.text for comparison in allComparisons"></select><br>
+   			</div> 
+   		</div> 
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button type="submit" ng-click="loadpages(pagedata)" class="btn btn-primary">show pages</button>
+		</div>  
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="btn-group btn-group-justified" role="group">
+ 				<a class="btn btn-primary" ng-click="sortByCol = 'path'; reverse=false"  role="button">sort by pagename</a>
+			 	<a class="btn btn-primary" ng-click="sortByCol = 'percDiff'; reverse=true"  role="button">sort by difference</a>
+   			</div>
+		</div>  
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+		
+			<h2>{{ hostname }}</h2>
+			<h2>count pages {{ countPages }}</h2>
+			
+			<form class="form-horizontal" role="form"  >
+				<div class="form-group">
+					<label for="fmnsdknfs" class="col-sm-1 control-label">filter:</label>
+					<div class="col-sm-4  input-group ">
+						<input type="text" class="form-control" ng-model="filterPage" placeholder="filter">
+					</div>
+				</div>
+			</form>
+		
+			<table class="table">
+				<tr>
+  					<th>#</th>
+  					<th>uid</th>
+ 					<th>path</th>
+  					<th>screenshot set 1</th> 
+ 					<th>screenshot set 2</th> 
+					<th>difference image</th>  
+					<th>all in one image</th>
+					<th>difference in percent</th>
+				</tr>
+				<tr ng-repeat="page in allPages | filter:filterPage | orderBy:sortByCol:reverse ">
+   					<td>{{ $index }}</td>
+  					<td>{{page.uid}}</td> 					
+ 					<td>{{page.path}}</td>
+ 					<td>
+						<a ng-show="page.screenshoturl1!='nope'" href="{{page.screenshoturl1}}" target="_blank">screenshot</a> 
+						<span ng-show="page.screenshoturl1=='nope'"> </span> 
+					</td>
+					<td>
+						<a ng-show="page.screenshoturl2!='nope'" href="{{page.screenshoturl2}}" target="_blank">screenshot</a> 
+						<span ng-show="page.screenshoturl2=='nope'"> </span> 
+					</td>
+					<td>
+						<a ng-show="page.screenshotdiff!='nope'" href="{{page.screenshotdiff}}" target="_blank">difference image</a> 
+						<span ng-show="page.screenshotdiff=='nope'"> </span> 
+					</td> 
+					<td>
+						<a ng-show="page.screenshotallinone!='nope'" href="{{page.screenshotallinone}}" target="_blank">all in one image</a> 
+						<span ng-show="page.screenshotallinone=='nope'"> </span> 
+					</td> 
+					<td>{{ page.percDiff }}</td> 
+				</tr>
+			</table>
+ 		</div>  
+	</div>
+</div>

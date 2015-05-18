@@ -1,0 +1,104 @@
+<div ng-controller="JobCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>start new crawl job</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form ng-submit="addCrawljob(newcrawljob)">
+ 				<div class="form-group">
+    				<label for="listofdomains">available domains</label>
+					<select id="listofdomains" ng-model="newcrawljob.selectedDomain" ng-options="domain.name for domain in allDomains"></select><br>
+   				</div>
+   				<div class="form-group">
+    				<label for="idjobdescription">description</label>
+   					<input ng-model="newcrawljob.description" type="text" class="form-control" id="idjobdescription" placeholder="description">
+   				</div>
+   				<!--
+   				
+   				<div class="form-group">
+    				<label for="idjobdepth">max Tiefe</label>
+   					<input ng-model="newcrawljob.depth" type="text" class="form-control" id="idjobdepth" placeholder="Rekursionstiefe">
+   				</div>
+   				<div class="form-group">
+    				<label for="idnumberpages">max Anzahl an Seiten</label>
+   					<input ng-model="newcrawljob.numberpages" type="text" class="form-control" id="idnumberpages" placeholder="max Anzahl an Seiten">
+   				</div>
+   				-->
+  				<button type="submit" class="btn btn-primary">start crawl job</button>
+			</form> 
+ 			
+  		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-12">
+			<h2>start new screenshot job</h2>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form ng-submit="addScreenshotjob(newscreenshotjob)">
+				<div class="form-group">
+    				<label for="listofwebsites">available websites</label>
+					<select id="listofwebsites" ng-model="newscreenshotjob.selectedWebsite" ng-options="website.text for website in allWebsites"></select><br>
+   				</div>
+   				<div class="form-group">
+    				<label for="idscreenshotdescription">description</label>
+   					<input ng-model="newscreenshotjob.description" type="text" class="form-control" id="idscreenshotdescription" placeholder="description">
+   				</div>
+   				<div class="form-group">
+    				<label for="idwidth">browser width (px)</label>
+   					<input ng-model="newscreenshotjob.width" type="text" class="form-control" id="idwidth" placeholder="browser width (px)">
+   				</div>
+   				<div class="form-group">
+    				<label for="idheight">browser height (px)</label>
+   					<input ng-model="newscreenshotjob.height" type="text" class="form-control" id="idheight" placeholder="browser height (px)">
+   				</div>
+  				<button type="submit" class="btn btn-primary">start new screenshot job</button>
+			</form>  
+  		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-12">
+			<h2>new screenshot comparison job</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form ng-submit="addScreenshotcomparisonjob(newscreenshotcomparisonjob)">
+				<div class="form-group">
+    				<label for="domainscompare">available domains</label>
+					<select id="domainscompare" ng-model="compareJobSelectedDomain" ng-options="domain.name for domain in allDomains"></select><br>
+   				</div> 
+   				<h2>
+   				selected domain: {{ newscreenshotcomparisonjob.selectedDomain.name }} 
+   				</h2>
+   				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+		    				<label for="domainscompare2">select crawl job 1</label>
+							<select id="domainscompare2" ng-model="newscreenshotcomparisonjob.selectedWebsiteSet1" ng-options="website.text for website in selectedDomainWebsites"></select><br>
+		   				</div> 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+		    				<label for="domainscompare3">select crawl job 2</label>
+							<select id="domainscompare" ng-model="newscreenshotcomparisonjob.selectedWebsiteSet2" ng-options="website.text for website in selectedDomainWebsites"></select><br>
+		   				</div> 
+					</div>
+				</div>
+				<div class="form-group">
+    				<label for="idscreenshotdescription2">description</label>
+   					<input ng-model="newscreenshotcomparisonjob.description" type="text" class="form-control" id="idscreenshotdescription2" placeholder="description">
+   				</div>
+  				<button type="submit" class="btn btn-primary">start screenshot comparison job</button>
+			</form>  
+  		</div>
+	</div>
+</div>

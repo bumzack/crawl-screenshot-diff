@@ -1,0 +1,54 @@
+<div ng-controller="SeoKeywordsCtrl">
+ 	<div class="row">
+		<div class="col-md-12">
+			<div ng-show="showError" class="alert alert-danger">{{alertErrorMessage}}</div>
+			<div ng-show="showInfo" class="alert alert-info">{{alertInfoMessage}}</div>
+			<div ng-show="showSuccess" class="alert alert-success">{{alertSuccessMessage}}</div>		</div>  
+	</div>  
+	 
+ 	<div class="row">
+		<div class="col-md-12">
+			<h3>available jobs</h3>
+  			<div class="form-group">
+    			<label for="listofwebsites">available jobs</label>
+				<select id="listofwebsites" ng-model="newKeywordList.selectedJob" ng-options="job.text for job in allJobs"></select><br>
+   			</div> 
+   		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button type="submit" ng-click="loadKeywords(newKeywordList)" class="btn btn-primary">show "keywords"</button>
+		</div>  
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12"> 
+			<h2>{{ domainname }}</h2>
+			<h2>count keywords  {{ countKeywords }}</h2>
+			<h3>{{ description }}</h3>
+			<form class="form-horizontal" role="form"  >
+				<div class="form-group">
+					<label for="fmnsdknfs" class="col-sm-1 control-label">filter:</label>
+					<div class="col-sm-4  input-group ">
+						<input type="text" class="form-control" ng-model="filterKeyword" placeholder="filter">
+					</div>
+				</div>
+			</form>
+		
+			<table class="table">
+				<tr>
+					<th>uid</th> 
+					<th>keyword</th>
+					<th>frequency</th>
+					<th>10 pages with most occurencies of the keyword</th> 
+				</tr>
+				<tr ng-repeat="keyword in allKeywords | filter:filterKeyword  ">
+					<td>{{keyword.worduid }}</td>
+					<td>{{keyword.word }}</td>
+					<td>{{keyword.anzahl }}</td> 
+					<td> <p ng-repeat="page in keyword.pages "><a href="{{page.url}}">{{page.path}}</a></p></td>
+    			</tr>
+			</table>
+ 		</div>  
+	</div>
+</div>

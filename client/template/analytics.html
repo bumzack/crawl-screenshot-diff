@@ -1,0 +1,72 @@
+<div ng-controller="AnalyticsCtrl">
+ 	<div class="row">
+		<div class="col-md-6">
+			<h3>available websites</h3>
+  			<div class="form-group">
+    			<label for="listofwebsites">available websites</label>
+				<select id="listofwebsites" ng-model="pagedata.selectedWebsite" ng-options="website.text for website in allWebsites"></select><br>
+   			</div> 
+   		</div>  
+   		<div class="col-md-6">
+			<h3>show number of pages </h3>
+  			<div class="form-group">
+    			<label for="listofwebsites">show number of pages</label>
+				<select id="listofwebsites" ng-model="pagedata.numberPages" ng-options="page.text for page in numberPages"></select><br>
+   			</div> 
+   		</div>  
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button type="submit" ng-click="loadpages(pagedata)" class="btn btn-primary">view pages</button>
+		</div>  
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+		
+			<h2>{{ hostname }}</h2>
+			<h2>count pages {{ countPages }}</h2>
+			
+			<form class="form-horizontal" role="form"  >
+				<div class="form-group">
+					<label for="fmnsdknfs" class="col-sm-1 control-label">filter:</label>
+					<div class="col-sm-4  input-group ">
+						<input type="text" class="form-control" ng-model="filterPage" placeholder="Filtern">
+					</div>
+				</div>
+			</form>
+		
+			<table class="table">
+				<tr>
+  					<th>#</th>
+  					<th>uid</th>
+ 					<th>path</th>
+ 					<th>screenshootloadtime</th>
+ 					<th>screenshot</th> 
+					<!-- 
+					<th>internal links</th>
+					<th>external links</th>
+					<th>images</th>
+					<th>iframes</th> 
+					 -->
+				</tr>
+				<tr ng-repeat="page in allPages | filter:filterPage ">
+   					<td>{{ $index }}</td>
+  					<td>{{page.uid}}</td> 					
+ 					<td>{{page.path}}</td>
+					<td>{{page.screenshootloadtime}} </td>
+					<td>
+						<a ng-show="page.screenshoturl!='nope'" href="{{page.screenshoturl}}" target="_blank">screenshot</a> 
+						<span ng-show="page.screenshoturl=='nope'">nope</span> 
+					</td>
+					<!-- 
+					<td>  </td>
+					<td>  </td>
+					<td>  </td>
+					<td> </td> 
+					 -->
+				</tr>
+			</table>
+ 		</div>  
+	</div>
+</div>

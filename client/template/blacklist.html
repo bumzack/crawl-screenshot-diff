@@ -1,0 +1,32 @@
+ <div ng-controller="BlacklistCtrl">
+ 	<div class="row">
+ 	 	<div class="col-lg-12">
+ 		<h3>add words to blacklist</h3>
+ 			<form   ng-submit="addWordlist()">
+ 				<div class="form-group">
+    				<label for="inputNewWordlist">list of words, seperated with a comma</label>
+   					<textarea class="form-control" rows="3"  ng-model="newwordlist.words"  id="inputNewWordlist" placeholder="list of words"></textarea>
+   				</div>
+  				<button type="submit" class="btn btn-primary">add words to blacklist</button>
+			</form> 
+   		</div> 
+   		<div ng-show="showError" class="alert alert-danger">{{alertErrorMessage}}</div>
+		<div ng-show="showInfo" class="alert alert-info">{{alertInfoMessage}}</div>
+		<div ng-show="showSuccess" class="alert alert-success">{{alertSuccessMessage}}</div>
+ 	</div>
+  	<div class="row "  >
+  		<div class="col-md-6">
+  			<h3>existing words in blacklist</h3>
+  			<div ng-repeat="word in allWords" ng-class=""  ng-class-even="'word-blacklist-color-even word-blacklist'" ng-class-odd="'word-blacklist word-blacklist-color-odd'">
+	 			  {{word.name }} 
+	 			<span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="wordDelete(word.uid)"></span>		
+	 		</div>
+  		</div>
+  		<div class="col-md-6">
+  			<h3>existing words in seoword list</h3>
+  			<div ng-repeat="word in allSEOWords"  ng-class-even="'word-blacklist-color-even word-blacklist'" ng-class-odd="'word-blacklist word-blacklist-color-odd'">
+	 			  {{word.word }} , 	 			 					
+	 		</div>
+  		</div>
+	</div>
+</div>

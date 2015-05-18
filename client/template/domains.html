@@ -1,0 +1,58 @@
+ <div ng-controller="DomainCtrl">
+ 	<div class="row">
+ 	 	<div class="col-md-12">
+ 			<h3>add new domain</h3>
+ 			<form class="form-inline" ng-submit="addDomain()">
+ 				<div class="form-group">
+    				<label for="inputNewDomain">domain (including http(s)://))</label>
+   					<input ng-model="newdomain.name" type="text" class="form-control" id="inputNewDomain" placeholder="new domain">
+  				</div> 
+  				<!-- 
+  				<div class="checkbox">
+    				<label>
+      					<input ng-model="newdomain.cronjob"type="checkbox">  
+    				</label>
+				</div>
+				 -->
+  				<button type="submit" class="btn btn-primary">add domain</button>
+			</form> 
+			<div ng-show="showError" class="alert alert-danger">{{alertErrorMessage}}</div>
+			<div ng-show="showInfo" class="alert alert-info">{{alertInfoMessage}}</div>
+			<div ng-show="showSuccess" class="alert alert-success">{{alertSuccessMessage}}</div>
+   		</div>  
+	</div>
+	
+	<div class="row">
+ 	 	<div class="col-md-12">
+			<form class="form-horizontal" role="form"  >
+				<div class="form-group">
+					<label for="fmnsdknfs" class="col-sm-1 control-label">filter:</label>
+					<div class="col-sm-4  input-group ">
+						<input type="text" class="form-control" ng-model="filterDomain" placeholder="filter">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="row "  >
+  		<div class="col-md-12">
+  			<h3>available domains</h3>
+  		</div>
+ 	</div>
+ 		 		 		
+ 	<div class="row ">
+ 		<table class="table">
+ 			<tr>
+ 				<th>uid</th> 
+ 				<th>domain</th> 
+  				<th>delete domain</th>
+ 			<tr>	
+ 			<tr ng-repeat="domain in allDomains | filter:filterDomain">
+ 				<td>{{domain.uid }}	</td> 
+ 				<td>{{domain.name }}</td> 
+ 				<td><span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="domainDelete(domain.uid)"></span></td>
+ 			</tr>				
+ 		</table>  
+	</div> 
+ </div>

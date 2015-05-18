@@ -1,0 +1,30 @@
+body {
+   padding-top: 80px;
+}
+
+.word-blacklist {
+	float: left; 
+ 	padding: 5px;
+	margin: 5px;
+	border-radius: 3px;
+}
+
+.word-blacklist-color-odd {
+	background-color: lightblue;
+}
+
+.word-blacklist-color-even {
+	background-color: lightgreen;
+}
+
+.word-blacklist .glyphicon-trash {
+	cursor: pointer; 
+}
+
+.dark {
+	background-color: #CFCCCC;
+}
+
+.light {
+	background-color: #E7E7EA;
+}
