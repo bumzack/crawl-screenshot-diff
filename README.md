@@ -4,6 +4,7 @@ Crawls a website, make screenshots and compare those screenshots visually
 
 It uses angularjs 1.3 for the web frontend and iojs and a mysql database on the server.
 
+This was a quick hack for a big website relaunch project to track the progress of the development and population with content of a new website (using Typo3 as CMS). That's why the front-end is not fully developed in a sense, that there are always feedbacks when a button is clicked or similar events. It's more of an "expert-system" - use the browser console and a terminal to get a grip of what's going on and if a click just activated the browser window or start a new job.
 
 ## How to install
 
