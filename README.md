@@ -28,9 +28,9 @@ npm install
 ```
 
 ### create an SSL certificate 
-Got to the `server` directory and create a SSL certificate if you don't have one. If you want use existing certificates change the path and filenames in  `server.js` accordingly.
+Got to the `server` directory and create a SSL certificate. If you want use an existing certificate, change the path and filenames in `server.js` accordingly.
 
-If you want to create your own certificate use the following command:
+If you want to create your own certificate, create one using the following command:
 ```
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout crawlscreen.key -out crawlscreen.crt
 ```
@@ -56,12 +56,13 @@ In the `server` directory you find a file called `config.js`. Adjust the constan
 ## First run
 
 Change to the `server` directory and start the server with  `node server.js`. 
-Open your browser and enter https://localhost:3000 which should opene the login form.
-The database dump contains 2 users:
+Open your browser and enter `https://localhost:3000` which should present you with a login form.
+The database dump contains 2 users, which allows you to login:
+ 
 * one admin user: username:  `admin`, password: `admin` 
 * one readonly user: username:  `readonly`, password: `readonly` 
 
-If you want to add more users or change the default passwords, use the following mysql statements: 
+If you want to add more users or change the default passwords, you can use the following mysql statements: 
 
 ##### insert an admin user
 ```
@@ -74,10 +75,10 @@ INSERT INTO crawl_user (username,  password, admin, accessrights)  VALUES ('read
 ```
 
 ## what it does
-*In a first step this tool uses `readonly` to retrieve the HTML code of the domain, uses `jsdom` and `jquery` to analyze the HTML Code and finds all internal links (and external links and images and forms and ...). Then it crawls through all internal links and saves the HTML code in the mysql database. No images, no javascript, no CSS files are downloaded.
+* In a first step this tool uses `readonly` to retrieve the HTML code of the domain, uses `jsdom` and `jquery` to analyze the HTML Code and finds all internal links (and external links and images and forms and ...). Then it crawls through all internal links and saves the HTML code in the mysql database. No images, no javascript, no CSS files are downloaded.
 When there is no unvisited internal link left, the crawl job is finished.
-*In a second step screenshots can be made for all of these found pages.
-*If the first 2 steps are repeated for the same domain, then the differences on these pages can be visualized in an diff-image resp. there is also an "all-in-one" image.
+* In a second step screenshots can be made for all of these found pages.
+* If the first 2 steps are repeated for the same domain, then the differences on these pages can be visualized in an diff-image resp. there is also an "all-in-one" image.
 
 ### 3 different jobs / cronjobs
 So there are 3 different jobs, which can be manually started via the web front-end or can also be started via cron-jobs. See the directory `server/cronjobs` for examples how this can be achieved. You'll find scripts there which start a crawl-job and a screenshot-job and a different script which starts a screenshot-comparison job for the last 2 crawl jobs of the domain.
@@ -87,20 +88,19 @@ This makes it possible to automatically create diff-images on a daily/weekly bas
 In the `server/log` directory several log files are  created and can grow quite fast in size. 
 
 ### troubleshooting
-* mysql connection fails: set the correct path to the "mysql.lock" file in the config.js file. (it worked on max osx without the path, on CentOS 7.1 the path was necessary to make it work).
-* phantomjs on maxosx: the current version is 2.0.0. if there are problems, try downgrading to 1.9.7. 
+* mysql connection fails: set the correct path to the `mysql.lock` file in the config.js file. (it worked on Mac OSX without the path, on CentOS 7.1 the path was necessary to make it work).
+* phantomjs on Mac OSX: the current version is 2.0.0. if there are problems, try downgrading to 1.9.7. 
 
 ### the SEO part
-is quite experimental. 
-When a crawl-job is finished, all the content is split it into single words and inserted into a table in the mysql database. This makes ist possible to count the occurencies of each word on a single page - and also take into account in which kind of HTML element the word is placed. So it is possible to weigh the use of a word whether it is only used once in a <p> element or if it is used in the <title> tag, an <h1> and a <p> tag. 
-To my limited knowledge of how google decides what's an important word an a page, this is kinda one of the criteria.
+is quite **experimental**. 
+
+When a crawl-job is finished, all the content is split it into single words and inserted into a table in the mysql database. This makes ist possible to count the occurencies of each word on a single page - and also take into account in which kind of HTML element the word is placed. So it is possible to weigh the use of a word whether it is only used once in a `<p>` element or if it is used in the `<title>` tag, an `<h1>` and a `<p>` tag. 
+To my limited knowledge of how google decides what's an important word an a page, this is sorta one of the criteria.
+
 
 ### a few words regarding security
-* not all mysql statements/values are escaped 
+* not all mysql statements/values are escaped
+ 
 
 ## License
 This software is licensed under the The MIT License (MIT) - see [The MIT License](https://github.com/bumzack/crawl-screenshot-diff/blob/master/license.txt) for details.
-
-
- 
-	
