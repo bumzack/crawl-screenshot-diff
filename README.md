@@ -117,7 +117,12 @@ To my limited knowledge of how google decides what's an important word an a page
 There is some code, which is currently not used or activated but it should be possible to make these features work without going through too much pain.
 * text external links: after parsing the html code with jsdom, different content types are stored in the database. Currently only internal links are used. There are also external links and these external links can be tested: which HTTP code is returned when these links are `curl`ed. This allows for a simple check whether or not external links on the page are working and which are not.
 * user admin: add/remove users via the web frontend. Change passwords in the web frontend. 
-* blacklist of words which should be irgnored for the SEO part.
+* blacklist of words which should be ignored for the SEO part.
+
+
+### data privacy
+The software logs the IP adresses of all requests in the `server/log/access.log`. If this does not comply with your privacy rules then remove the IP in the  `server.js` file - search for `this.ip` as a starting point. 
+
 
 ## License
 This software is licensed under the The MIT License (MIT) - see [The MIT License](https://github.com/bumzack/crawl-screenshot-diff/blob/master/license.txt) for details.
