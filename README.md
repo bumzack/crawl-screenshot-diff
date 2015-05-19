@@ -77,9 +77,9 @@ INSERT INTO crawl_user (username,  password, admin, accessrights)  VALUES ('read
 ```
 
 ## what it does
-* In a first step this tool uses `readonly` to retrieve the HTML code of the domain, uses `jsdom` and `jquery` to analyze the HTML Code and finds all internal links (and external links and images and forms and ...). Then it crawls through all internal links and saves the HTML code in the mysql database. No images, no javascript, no CSS files are downloaded.
+* In a first step this tool uses `curl` to retrieve the HTML code of the domain, uses `jsdom` and `jquery` to analyze the HTML code and finds all internal links (and external links and images and forms and ...). Then it crawls through all internal links and saves the HTML code of allpages in the mysql database. No images, no javascript, no CSS files are downloaded.
 When there is no unvisited internal link left, the crawl job is finished.
-* In a second step screenshots can be made for all of these found pages.
+* In a second step screenshots can be made for all of these pages.
 * If the first 2 steps are repeated for the same domain, then the differences on these pages can be visualized in an diff-image resp. there is also an "all-in-one" image.
 
 ### 3 different jobs / cronjobs
@@ -87,18 +87,18 @@ So there are 3 different jobs, which can be manually started via the web front-e
 This makes it possible to automatically create diff-images on a daily/weekly basis for a domain.
 
 ### logging
-In the `server/log` directory several log files are  created and can grow quite fast in size. 
+In the `server/log` directory several log files are created and can grow quite fast in size. 
 
 ### troubleshooting
 * mysql connection fails: set the correct path to the `mysql.lock` file in the config.js file. (it worked on Mac OSX without the path, on CentOS 7.1 the path was necessary to make it work).
 * phantomjs on Mac OSX: the current version is 2.0.0. if there are problems, try downgrading to 1.9.7. 
-* if you get an error similar to `yieldable wrapper  dbQuery threadId 2770 error-msg: Error: write EPIPE` then you can try an either 
+* if you get an error similar to `yieldable wrapper  dbQuery threadId 2770 error-msg: Error: write EPIPE` then you can try a either 
     * decrease the value of `curljobMaxarraylength` or 
     * if you have root access on your server, then increase the values of the following 2 constants in the `[mysqld]` section in the `my.cnf`  file (don't know if 512M is the right or a good value - it seems enough tough :-) )
 		* `max_allowed_packet=512M`
 		* `net_buffer_length=512M`
 
-the error indicates, that the SQL queries are too big. For technical details see this stackoverflow  [question](http://stackoverflow.com/questions/93128/mysql-error-1153-got-a-packet-bigger-than-max-allowed-packet-bytes)
+The error indicates, that the SQL queries are too big. For technical details see this stackoverflow  [question](http://stackoverflow.com/questions/93128/mysql-error-1153-got-a-packet-bigger-than-max-allowed-packet-bytes) (the nodejs error doesn't reveal the true nature of the error).
 
   
 ### the SEO part
