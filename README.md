@@ -92,7 +92,15 @@ In the `server/log` directory several log files are  created and can grow quite 
 ### troubleshooting
 * mysql connection fails: set the correct path to the `mysql.lock` file in the config.js file. (it worked on Mac OSX without the path, on CentOS 7.1 the path was necessary to make it work).
 * phantomjs on Mac OSX: the current version is 2.0.0. if there are problems, try downgrading to 1.9.7. 
+* if you get an error similar to `yieldable wrapper  dbQuery threadId 2770 error-msg: Error: write EPIPE` then you can try an either 
+    * decrease the value of `curljobMaxarraylength` or 
+    * if you have root access on your server, then increase the values of the following 2 constants in the `[mysqld]` section in the `my.cnf`  file (don't know if 512M is the right or a good value - it seems enough tough :-) )
+		* `max_allowed_packet=512M`
+		* `net_buffer_length=512M`
 
+the error indicates, that the SQL queries are too big. For technical details see this stackoverflow  [question](http://stackoverflow.com/questions/93128/mysql-error-1153-got-a-packet-bigger-than-max-allowed-packet-bytes)
+
+  
 ### the SEO part
 is quite **experimental**. 
 
@@ -102,7 +110,14 @@ To my limited knowledge of how google decides what's an important word an a page
 
 ### a few words regarding security
 * not all mysql statements/values are escaped
+* both the curl and phantomjs command use parameters which allow the access to untrusted SSL certificates. If you don't want that, then remove the `-k` parameter for the curl call and the `--ignore-ssl-errors=true` parameter for the phantomjs call.
  
+
+### unused features
+There is some code, which is currently not used or activated but it should be possible to make these features work without going through too much pain.
+* text external links: after parsing the html code with jsdom, different content types are stored in the database. Currently only internal links are used. There are also external links and these external links can be tested: which HTTP code is returned when these links are `curl`ed. This allows for a simple check whether or not external links on the page are working and which are not.
+* user admin: add/remove users via the web frontend. Change passwords in the web frontend. 
+* blacklist of words which should be irgnored for the SEO part.
 
 ## License
 This software is licensed under the The MIT License (MIT) - see [The MIT License](https://github.com/bumzack/crawl-screenshot-diff/blob/master/license.txt) for details.
