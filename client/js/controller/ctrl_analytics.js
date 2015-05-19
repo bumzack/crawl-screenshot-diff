@@ -116,7 +116,7 @@ app.controller('AnalyticsCtrl', function ($scope, factAnalytics, $timeout) {
 	$scope.numberPages.push(entry);
 
 	var entry= {
-		text: 'alle',
+		text: 'all',
 		maxCount : 100000000
 	}
 	$scope.numberPages.push(entry);

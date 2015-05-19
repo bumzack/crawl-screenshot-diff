@@ -173,7 +173,7 @@ app.controller('SeoKeywordsPerPageCtrl', function ($scope, factSeo, factDomains,
 	$scope.numberKeywords.push(entry);
 
 	var entry= {
-		text: 'alle',
+		text: 'all',
 		maxCount : 100000000
 	}
 	$scope.numberKeywords.push(entry);

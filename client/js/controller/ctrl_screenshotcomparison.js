@@ -150,7 +150,7 @@ app.controller('ScreenshotCompareCtrl', function ($scope, factAnalytics, $timeou
 	$scope.numberPages.push(entry);
 
 	var entry= {
-		text: 'alle',
+		text: 'all',
 		maxCount : 100000000
 	}
 	$scope.numberPages.push(entry);
